@@ -5,25 +5,25 @@ import Submit from '../components/Submit'
 import PostList from '../components/PostList'
 import { withApollo } from '../lib/apollo'
 
-const IndexPage = () => (
+const ClientOnlyPage = (props) => (
   <App>
     <Header />
     <InfoBox>
-      ℹ️ This example shows how to fetch all initial apollo queries on the
-      server. If you <a href="/">reload</a> this page you won't see a loader
-      since Apollo fetched all needed data on the server. This prevents{' '}
+      ℹ️ This example shows how to disable apollos query fetching on the server.
+      If you <a href="/client-only">reload</a> this page, you will see a loader
+      since Apollo didn't fetch any data on the server. This allows{' '}
       <a
         href="https://nextjs.org/blog/next-9#automatic-static-optimization"
         target="_blank"
         rel="noopener noreferrer"
       >
         automatic static optimization
-      </a>{' '}
-      in favour of full Server-Side-Rendering.
+      </a>
+      .
     </InfoBox>
     <Submit />
     <PostList />
   </App>
 )
 
-export default withApollo({ ssr: true })(IndexPage)
+export default withApollo()(ClientOnlyPage)

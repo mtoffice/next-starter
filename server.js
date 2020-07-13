@@ -6,7 +6,7 @@ const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
 
-const port = parseInt(process.env.PORT, 10) || 3001
+const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production';
 
 // Multi-process to utilize all CPU cores.
@@ -50,102 +50,6 @@ if (!dev && cluster.isMaster) {
         maxAge: dev ? '0' : '365d'
       }));
 
-      // server.get('/:id', (req, res) => {
-      //   const actualPage = '/znaki'
-      //   const queryParams = { 
-      //     hash: req.params.id,
-      //    }
-      //   nextApp.render(req, res, actualPage, queryParams)
-      // })
-
-      server.get('/znaki-za-nevarnost/:subcategory', (req, res) => {
-        const actualPage = '/znaki-za-nevarnost'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/znaki-za-izrecne-odredbe/:subcategory', (req, res) => {
-        const actualPage = '/znaki-za-izrecne-odredbe'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/znaki-za-obvestila/:subcategory', (req, res) => {
-        const actualPage = '/znaki-za-obvestila'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/dopolnilne-table/:subcategory', (req, res) => {
-        const actualPage = '/dopolnilne-table'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/znaki-za-oznacevanje-roba-vozisca-in-preprecevanje-voznje/:subcategory', (req, res) => {
-        const actualPage = '/znaki-za-oznacevanje-roba-vozisca-in-preprecevanje-voznje'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/znaki-za-oznacevanje-del-in-ovir-v-cestnem-prometu/:subcategory', (req, res) => {
-        const actualPage = '/znaki-za-oznacevanje-del-in-ovir-v-cestnem-prometu'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/znaki-turisticne-in-druge-obvestilne-signalizacije/:subcategory', (req, res) => {
-        const actualPage = '/znaki-turisticne-in-druge-obvestilne-signalizacije'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/oprema-za-vodenje-prometa/:subcategory', (req, res) => {
-        const actualPage = '/oprema-za-vodenje-prometa'
-        const queryParams = { 
-          subcategory: req.params.subcategory,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/produkt/znak/:id', (req, res) => {
-        const actualPage = '/produkt/znak'
-        const queryParams = { 
-          hash: req.params.id,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/produkt/uredi/:id/stevilka/:cartId', (req, res) => {
-        const actualPage = '/produkt/uredi'
-        const queryParams = { 
-          hash: req.params.id,
-          cartId: req.params.cartId,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
-
-      server.get('/uporabnik/narocila/:id', (req, res) => {
-        const actualPage = '/uporabnik/narocila'
-        const queryParams = { 
-          hash: req.params.id,
-         }
-        nextApp.render(req, res, actualPage, queryParams)
-      })
 
       // Default catch-all renders Next app
       server.get('*', (req, res) => {

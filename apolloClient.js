@@ -1,6 +1,5 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { HttpLink } from 'apollo-link-http'
 import { resolvers, typeDefs } from "./lib/resolvers";
 import { createUploadLink } from 'apollo-upload-client';
 
@@ -19,12 +18,11 @@ export default function createApolloClient(initialState, ctx) {
     } 
   }
     
-    
 
   const client = new ApolloClient({
     ssrMode: Boolean(ctx),
     link: new createUploadLink({
-      uri: process.env.NODE_ENV==="production" ? "https://signaco-api.herokuapp.com/graphql" : 'http://localhost:3000/graphql',
+      uri: 'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn',
       headers: token,
       credentials: 'same-origin',
     }),
@@ -33,19 +31,11 @@ export default function createApolloClient(initialState, ctx) {
     resolvers
   });
 
+
   client.cache.writeData({
     data: {
       isLoggedIn: false,
-      isAdmin: false,
-      isPreview: false,
-      agreeToPrivacyPolicy:false,
-      orders:[],
       cartItems:[],
-      successPopup: {
-        __typename: "successPopup",
-        show: false,
-        error: false
-      },
     }
   });
 
@@ -57,16 +47,7 @@ export default function createApolloClient(initialState, ctx) {
     client.cache.writeData({
       data: {
         isLoggedIn: !!localStorage.getItem("token"),
-        isAdmin: false,
-        isPreview: false,
-        agreeToPrivacyPolicy: false,
-        orders:[],
         cartItems:cartItems,
-        successPopup: {
-          __typename: "successPopup",
-          show: false,
-          error: false
-        },
       }
     });
   }
